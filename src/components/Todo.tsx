@@ -33,11 +33,14 @@ export const Todo: React.FC<Props> = ({
     setInputChange(e.target.value);
   };
 
-  const handleTitleBlur = () => {
-    updatePost(id, {
-      ...todo,
-      title: inputChange.trim(),
-    });
+  const handleTitleBlur = async () => {
+    try {
+      await updatePost(id, {
+        ...todo,
+        title: inputChange.trim(),
+      });
+      setIsEditing(false);
+    } catch (error) {}
   };
 
   const handleTitleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
